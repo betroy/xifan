@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.troy.xifan">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
+    <application
+        android:name=".App"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".activity.SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.MainActivity"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+        <activity
+            android:name=".activity.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/LoginTheme">
+        </activity>
+        <activity
+            android:name=".activity.WirteStatusActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".activity.StatusDetailActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".activity.ConversationActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".activity.SearchActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateVisible"
+            />
+        <activity
+            android:name=".activity.TrendStatusesActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.UserListActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.SettingsActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.ProfileActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.BrowserActivity"
+            android:screenOrientation="portrait"/>
+    </application>
+
+</manifest>

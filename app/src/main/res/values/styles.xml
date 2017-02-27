@@ -1,0 +1,21 @@
+<resources>
+
+    <style name="TextAppearance.Philm.FloatLabel" parent="android:Widget">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="ToolbarStyles">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+    <style name="TabLayoutStyles">
+    </style>
+
+    <style name="SearchToolbar.Title.Text" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textColor">@color/colorGray</item>
+        <item name="android:textSize">@dimen/text_font_size_small</item>
+    </style>
+</resources>

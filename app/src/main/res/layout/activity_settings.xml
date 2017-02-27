@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <include layout="@layout/include_toolbar"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <FrameLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+        <LinearLayout
+            android:id="@+id/layout_logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical"
+            >
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_line_small_size"
+                android:background="@color/colorGray"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_large"
+                android:gravity="center"
+                android:text="@string/text_logout"
+                android:textColor="@android:color/holo_red_light"
+                android:textSize="@dimen/text_font_size_normal"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:orientation="vertical"
+    >
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/logo_margin_top"
+        android:src="@mipmap/ic_logo"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_medium"
+        android:layout_marginRight="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_large"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        >
+        <com.troy.xifan.view.FloatLabelLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:floatLabelTextAppearance="@style/TextAppearance.Philm.FloatLabel"
+            >
+            <EditText
+                android:id="@+id/edit_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorPrimary"
+                android:hint="@string/login_username_hint"
+                android:inputType="text"
+                android:maxLines="1"
+                android:nextFocusDown="@+id/edit_password"
+                android:textSize="@dimen/text_font_size_normal"
+                />
+        </com.troy.xifan.view.FloatLabelLayout>
+
+        <com.troy.xifan.view.FloatLabelLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:floatLabelTextAppearance="@style/TextAppearance.Philm.FloatLabel"
+            >
+            <EditText
+                android:id="@+id/edit_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorPrimary"
+                android:hint="@string/login_password_hint"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:textSize="@dimen/text_font_size_normal"
+                />
+        </com.troy.xifan.view.FloatLabelLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_login"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/login_btn_height"
+        android:layout_marginLeft="@dimen/margin_medium"
+        android:layout_marginRight="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_large"
+        android:backgroundTint="@color/colorPrimary"
+        android:elevation="@dimen/elevation"
+        android:text="@string/login_text"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/text_font_size_normal"
+        />
+</LinearLayout>

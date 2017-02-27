@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+    <TextView
+        android:id="@+id/text_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textSize="@dimen/text_font_size_tiny"
+        tools:text="2017-01-14"
+        />
+    <TextView
+        android:id="@+id/text_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:background="@mipmap/bg_dm_out"
+        android:padding="@dimen/margin_smaller"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/text_font_size_small"
+        tools:text="私信私信"
+        />
+</LinearLayout>

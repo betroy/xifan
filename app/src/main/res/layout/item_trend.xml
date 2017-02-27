@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/margin_large"
+    android:foreground="?android:attr/selectableItemBackground"
+    >
+    <TextView
+        android:id="@+id/text_trend_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/margin_smaller"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/text_font_size_small"
+        tools:text="热门话题"
+        />
+</LinearLayout>

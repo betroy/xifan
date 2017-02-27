@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="FloatLabelLayout">
+        <attr format="reference" name="floatLabelTextAppearance"/>
+        <attr format="reference|dimension" name="floatLabelPaddingLeft"/>
+        <attr format="reference|dimension" name="floatLabelPaddingRight"/>
+        <attr format="reference|dimension" name="floatLabelPaddingTop"/>
+        <attr format="reference|dimension" name="floatLabelPaddingBottom"/>
+        <!-- The hint to display in the floating label -->
+        <attr format="reference|string" name="floatLabelHint"/>
+    </declare-styleable>
+</resources>

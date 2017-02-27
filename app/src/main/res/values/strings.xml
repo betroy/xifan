@@ -1,0 +1,112 @@
+<resources>
+    <string name="app_name">嘻饭</string>
+    <!--login-->
+    <string name="login_username_error"></string>
+    <string name="login_password_error"></string>
+    <string name="login_username_not_null">用户名不能为空</string>
+    <string name="login_password_not_null">密码不能为空</string>
+    <string name="login_username_hint">用户名</string>
+    <string name="login_password_hint">密码</string>
+    <string name="login_text">登录</string>
+    <string name="logining_text">登录中...</string>
+
+    <!--write-->
+    <string name="title_write">发饭否</string>
+    <string name="write_status_hint_text">说点什么</string>
+
+    <!--消息详情-->
+    <string name="title_status_detail">消息详情</string>
+
+    <!--通知-->
+    <string name="title_message">通知</string>
+    <string name="title_tab_mention_msg">消息</string>
+    <string name="title_tab_direct_msg">私信</string>
+
+    <!--私信-->
+    <string name="title_dm">私信</string>
+    <!--搜索-->
+    <string name="title_search">搜索</string>
+    <string name="title_tab_topic">热门话题</string>
+    <string name="title_tab_public_timeline">随便看看</string>
+    <!--个人-->
+    <string name="title_profile">个人</string>>
+    <string name="title_tab_profile_all">全部</string>
+    <string name="title_tab_profile_favorite">收藏</string>
+    <string name="title_tab_profile_photo">相册</string>
+    <string name="btn_text_dm">私信</string>
+    <string name="btn_text_following">已关注</string>
+    <string name="btn_text_unfollowing">关注</string>
+    <string name="text_status">消息</string>
+    <string name="text_following">关注</string>
+    <string name="text_follower">粉丝</string>
+
+    <!--网络错误信息-->
+    <string name="http_unauthorized_error">登录失败</string>
+    <string name="http_service_error">服务器繁忙\n请稍后再试</string>
+    <string name="http_connect_error">无法连接到网络\n请稍后再试</string>
+    <string name="http_data_parse_error">数据解析失败</string>
+    <string name="http_connect_timeout">网络连接超时</string>
+    <string name="http_unknow_error">未知错误</string>
+
+    <!--bottom navigation-->
+    <string name="bottom_navigation_home">主页</string>
+    <string name="bottom_navigation_message">通知</string>
+    <string name="bottom_navigation_search">搜索</string>
+    <string name="bottom_navigation_profile">个人</string>
+
+    <!--settings-->
+    <string name="title_settings">设置</string>
+    <string name="text_clean_cache">清理缓存</string>
+    <string name="text_feedback">意见反馈</string>
+    <string name="text_check_update">检查更新</string>
+    <string name="text_about">关于饭否</string>
+
+    <!--text-->
+    <string name="text_url_link">&#160;网页链接</string>
+    <string name="action_write">发饭否</string>
+    <string name="action_delete">删除</string>
+    <string name="action_favorite">收藏</string>
+    <string name="action_cancel_favorite">取消收藏</string>
+    <string name="action_copy">复制</string>
+    <string name="action_share">分享</string>
+    <string name="action_send_status">发送</string>
+
+    <string name="text_dialog_positive">确定</string>
+    <string name="text_dialog_negative">取消</string>
+    <string name="text_dialog_delete_msg">确定删除吗？</string>
+    <string name="text_retry">点击重试</string>
+    <string name="text_no_more">没有更多数据了</string>
+    <string name="text_empty">空空如也</string>
+    <string name="text_network_error">网络错误</string>
+    <string name="text_capture_photo">拍摄照片</string>
+    <string name="text_choose_photo">选取照片</string>
+    <string name="text_dialog_title_tips">提示</string>
+    <string name="text_remove_photo">确定删除吗？</string>
+    <string name="text_copy_success">已复制到剪切板</string>
+    <string name="text_favorite_success">收藏成功</string>
+    <string name="text_favorite_fail">收藏失败</string>
+    <string name="text_cancel_favorite_success">取消收藏成功</string>
+    <string name="text_cancel_favorite_fail">取消收藏失败</string>
+    <string name="text_operate_success">操作成功</string>
+    <string name="text_operate_fail">操作失败</string>
+    <string name="text_delete_success">删除成功</string>
+    <string name="text_delete_fail">删除失败</string>
+    <string name="text_status_not_empty">消息内容不能为空</string>
+    <string name="text_send_status_success">发送成功</string>
+    <string name="text_send_status_fail">发送失败</string>
+    <string name="text_photo_path_error">图片路径错误</string>
+    <string name="text_upload_new_photo">上传了新照片</string>
+    <string name="text_num_zero">0</string>
+    <string name="text_logout">登出</string>
+    <string name="text_logout_tips">确定登出？</string>
+
+    <!--friends-->
+    <string name="title_following">关注</string>
+    <string name="title_follower">粉丝</string>
+
+    <!--dialog-->
+    <string-array name="photo_choose">
+        <item>拍照</item>
+        <item>从相册选择</item>
+    </string-array>
+</resources>

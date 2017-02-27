@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_smaller"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        >
+        <!--头像-->
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/image_avatar"
+            android:layout_width="@dimen/status_avatar_size"
+            android:layout_height="@dimen/status_avatar_size"
+            android:src="@mipmap/image_avatar"
+            />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginLeft="@dimen/margin_smaller"
+                android:orientation="vertical"
+                >
+                <!--用户ID-->
+                <TextView
+                    android:id="@+id/text_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/text_font_size_small"
+                    android:textStyle="bold"
+                    tools:text="Troy"
+                    />
+
+                <TextView
+                    android:id="@+id/text_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="@dimen/margin_tiny"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/text_font_size_tiny"
+                    tools:text="xi fan"
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/text_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginTop="@dimen/margin_tiny"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/text_font_size_tiny"
+                tools:text="16-12-01"
+                />
+        </FrameLayout>
+    </LinearLayout>
+</FrameLayout>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#21C1F4</color>
+    <color name="colorPrimaryDark">#21C1F4</color>
+    <color name="colorAccent">#21C1F4</color>
+    <color name="colorGray">#999999</color>
+    <color name="colorTextGray">#CCCCCC</color>
+    <color name="colorYellow">#FDD130</color>
+    <color name="colorBlack">#404040</color>
+    <color name="loading_red">#F36160</color>
+    <color name="loading_black">#0D1E23</color>
+    <color name="loading_yellow">#FCB26B</color>
+    <color name="loading_green">#1DB19F</color>
+    <color name="colorRed">#FFFF0000</color>
+    <color name="divider_line_color">#E6E6E6</color>
+    <color name="background_color">#F5F5F5</color>
+
+    <integer-array name="google_colors">
+        <item>@color/loading_red</item>
+        <item>@color/loading_black</item>
+        <item>@color/loading_yellow</item>
+        <item>@color/loading_green</item>
+    </integer-array>
+
+    <integer-array name="refreshing_color">
+        <item>@color/colorPrimary</item>
+    </integer-array>
+</resources>

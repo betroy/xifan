@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <include layout="@layout/include_toolbar"/>
+    <include
+        layout="@layout/include_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="@dimen/margin_smaller"
+        android:layout_marginRight="@dimen/margin_smaller"
+        android:gravity="bottom"
+        >
+        <EditText
+            android:id="@+id/edit_msg"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textColor="@android:color/black"
+            />
+        <Button
+            android:id="@+id/button_send_dm"
+            android:layout_width="60dp"
+            android:layout_height="45dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="@string/action_send_status"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_font_size_tiny"
+            />
+    </LinearLayout>
+</LinearLayout>
