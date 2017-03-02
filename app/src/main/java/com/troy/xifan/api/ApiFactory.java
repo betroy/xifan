@@ -40,7 +40,8 @@ public interface ApiFactory {
 
     //随便看看
     @GET(Constants.FanFou.PUBLIC_TIMELIN_URL)
-    Observable<HttpResponseData<List<StatusRes>>> getPublicTimeline();
+    Observable<HttpResponseData<List<StatusRes>>> getPublicTimeline(
+            @QueryMap Map<String, String> queryMap);
 
     //删除消息
     @POST(Constants.FanFou.DESTROY_STATUSES_URL)

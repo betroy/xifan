@@ -15,6 +15,7 @@ import com.troy.xifan.config.Constants;
 import com.troy.xifan.http.HttpRequestFactory;
 import com.troy.xifan.http.callback.SimpleHttpRequestCallback;
 import com.troy.xifan.http.exception.ApiException;
+import com.troy.xifan.http.request.BaseRequestParams;
 import com.troy.xifan.model.response.StatusRes;
 import com.troy.xifan.util.UIUtils;
 import java.util.List;
@@ -39,8 +40,10 @@ public class PublicTimelineFragment extends BaseFragment {
     }
 
     private void getPublicTimeline() {
+        BaseRequestParams request=new BaseRequestParams();
+
         HttpRequestFactory.getInstance()
-                .getPublicTimeline(new SimpleHttpRequestCallback<List<StatusRes>>() {
+                .getPublicTimeline(request,new SimpleHttpRequestCallback<List<StatusRes>>() {
                     @Override
                     public void onSuccess(List<StatusRes> responseData) {
                         mStatusAdapter.clear();

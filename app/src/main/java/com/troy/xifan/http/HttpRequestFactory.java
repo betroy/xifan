@@ -77,8 +77,8 @@ public class HttpRequestFactory {
         subscribe(mServiceFactory.getUserTimeline(requestParams.convertToQueryMap()), callback);
     }
 
-    public void getPublicTimeline(HttpRequestCallback callback) {
-        subscribe(mServiceFactory.getPublicTimeline(), callback);
+    public void getPublicTimeline(BaseRequestParams requestParams,HttpRequestCallback callback) {
+        subscribe(mServiceFactory.getPublicTimeline(requestParams.convertToQueryMap()), callback);
     }
 
     public void destroyStatus(BaseRequestParams requestParams, HttpRequestCallback callback) {
