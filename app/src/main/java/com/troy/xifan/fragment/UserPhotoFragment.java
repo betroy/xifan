@@ -116,6 +116,7 @@ public class UserPhotoFragment extends BaseFragment {
     }
 
     private void getUserPhotos(final boolean loadMore) {
+        mPage = loadMore ? ++mPage : 0;
         StatusesRequest request = new StatusesRequest();
         request.setPage(String.valueOf(++mPage));
         request.setId(mUser == null ? null : mUser.getId());
