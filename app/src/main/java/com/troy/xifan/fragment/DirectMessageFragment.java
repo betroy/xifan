@@ -51,8 +51,9 @@ public class DirectMessageFragment extends BaseFragment {
     }
 
     private void getDirectMessage(final boolean loadMore) {
+        mPage = loadMore ? ++mPage : 1;
         BaseRequestParams request = new BaseRequestParams();
-        request.setPage(String.valueOf(++mPage));
+        request.setPage(String.valueOf(mPage));
 
         HttpRequestFactory.getInstance()
                 .getConversationList(request,

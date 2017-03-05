@@ -114,16 +114,16 @@ public class UserPhotoFragment extends BaseFragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
 
-        if (isVisibleToUser&&!isLoaded) {
+        if (isVisibleToUser && !isLoaded) {
             getUserPhotos(false);
-            isLoaded=true;
+            isLoaded = true;
         }
     }
 
     private void getUserPhotos(final boolean loadMore) {
-        mPage = loadMore ? ++mPage : 0;
+        mPage = loadMore ? ++mPage : 1;
         StatusesRequest request = new StatusesRequest();
-        request.setPage(String.valueOf(++mPage));
+        request.setPage(String.valueOf(mPage));
         request.setId(mUser == null ? null : mUser.getId());
 
         HttpRequestFactory.getInstance()
