@@ -3,7 +3,6 @@ package com.troy.xifan.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import com.orhanobut.logger.Logger;
 import java.util.List;
 
 /**
@@ -16,20 +15,17 @@ public class SearchPagerAdapter extends FragmentPagerAdapter {
 
     public SearchPagerAdapter(FragmentManager fm, List<Fragment> fragments, String[] tabTitles) {
         super(fm);
-        Logger.d("SearchPagerAdapter:");
         this.fragments = fragments;
         this.tabTitles = tabTitles;
     }
 
     @Override
     public Fragment getItem(int position) {
-        Logger.d("getItem:"+fragments.get(position));
         return fragments.get(position);
     }
 
     @Override
     public int getCount() {
-        Logger.d("fragments:"+fragments.size());
         return fragments.size();
     }
 

@@ -29,6 +29,7 @@ public class DirectMessageFragment extends BaseFragment {
 
     private int mPage;
     private ConversationListAdapter mConversationListAdapter;
+    private boolean isLoaded;
 
     public static Fragment newInstance() {
         return new DirectMessageFragment();
@@ -40,9 +41,13 @@ public class DirectMessageFragment extends BaseFragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        getDirectMessage(false);
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        if (isVisibleToUser && !isLoaded) {
+            getDirectMessage(false);
+            isLoaded = true;
+        }
     }
 
     private void getDirectMessage(final boolean loadMore) {

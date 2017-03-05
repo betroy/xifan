@@ -1,7 +1,6 @@
 package com.troy.xifan.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import butterknife.BindView;
@@ -27,15 +26,20 @@ public class TrendFragment extends BaseFragment {
     @BindView(R.id.recycler_view) EasyRecyclerView mRecyclerView;
 
     private TrendAdapter mTrendAdapter;
+    private boolean isLoaded;
 
     public static Fragment newInstance() {
         return new TrendFragment();
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        getTrends();
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        if (isVisibleToUser && !isLoaded) {
+            getTrends();
+            isLoaded = true;
+        }
     }
 
     private void getTrends() {

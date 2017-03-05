@@ -115,6 +115,7 @@ public class ProfileFragment extends BaseFragment {
                 getString(R.string.title_tab_profile_photo)
         };
         mTabLayout.setupWithViewPager(mViewPager);
+        mViewPager.setOffscreenPageLimit(mTabtitles.length);
         mViewPager.setAdapter(
                 new ProfilePagerAdapter(getChildFragmentManager(), mFragments, mTabtitles));
 

@@ -33,6 +33,7 @@ public class UserTimelineFragment extends BaseFragment {
     private String mMaxId;
     private StatusAdapter mStatusAdapter;
     private UserRes mUser;
+    private boolean isLoaded;
 
     public static Fragment newInstance(Bundle bundle) {
         Fragment fragment = new UserTimelineFragment();
@@ -101,9 +102,13 @@ public class UserTimelineFragment extends BaseFragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        getUserTimeline(false);
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        if (isVisibleToUser && !isLoaded) {
+            getUserTimeline(false);
+            isLoaded = true;
+        }
     }
 
     private void getUserTimeline(final boolean loadMore) {

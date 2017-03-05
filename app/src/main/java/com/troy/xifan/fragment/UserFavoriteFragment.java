@@ -32,6 +32,7 @@ public class UserFavoriteFragment extends BaseFragment {
     private UserRes mUser;
     private int mPage;
     private StatusAdapter mStatusAdapter;
+    private boolean isLoaded;
 
     public static Fragment newInstance(Bundle bundle) {
         Fragment fragment = new UserFavoriteFragment();
@@ -100,9 +101,13 @@ public class UserFavoriteFragment extends BaseFragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        getFavorites(false);
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        if (isVisibleToUser && !isLoaded) {
+            getFavorites(false);
+            isLoaded = true;
+        }
     }
 
     private void getFavorites(final boolean loadMore) {
