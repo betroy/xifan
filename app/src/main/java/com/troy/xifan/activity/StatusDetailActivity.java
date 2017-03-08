@@ -89,6 +89,7 @@ public class StatusDetailActivity extends BaseActivity {
 
         OnClickLister onClickLister = new OnClickLister(mStatusRes);
 
+        mImagePhoto.setOnClickListener(onClickLister);
         mViewRepeat.setOnClickListener(onClickLister);
         mViewComment.setOnClickListener(onClickLister);
         mImageAvatar.setOnClickListener(onClickLister);
@@ -208,6 +209,16 @@ public class StatusDetailActivity extends BaseActivity {
                     Router.build(Constants.Router.PROFILE)
                             .extras(userBundle)
                             .go(StatusDetailActivity.this);
+                    break;
+                case R.id.image_photo:
+                    if (mStatusRes.getPhoto() != null) {
+                        Bundle imageBundle = new Bundle();
+                        imageBundle.putString(LargeImageActivity.BUNDLE_IMAGE_URL,
+                                mStatusRes.getPhoto().getLargeurl());
+                        Router.build(Constants.Router.LARGE_IMAGE)
+                                .extras(imageBundle)
+                                .go(StatusDetailActivity.this);
+                    }
                     break;
                 case R.id.view_comment:
                     Bundle commentBundle = new Bundle();

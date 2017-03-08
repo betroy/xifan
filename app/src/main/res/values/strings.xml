@@ -104,6 +104,9 @@
     <string name="title_following">关注</string>
     <string name="title_follower">粉丝</string>
 
+    <!--large image-->
+    <string name="title_large_image">查看图片</string>
+
     <!--dialog-->
     <string-array name="photo_choose">
         <item>拍照</item>

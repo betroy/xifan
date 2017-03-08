@@ -105,6 +105,7 @@ public class Constants {
         public static final String MAIN = "main";
         public static final String WRITE_STATUS = "write_status";
         public static final String STATUS_DETAIL = "status_detail";
+        public static final String LARGE_IMAGE="large_image";
         public static final String USER_LIST = "user_list";
         public static final String SEARCH = "search";
         public static final String TREND_STATUSES = "trend_statuses";

@@ -22,6 +22,7 @@ import com.chenenyu.router.Router;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.troy.xifan.R;
+import com.troy.xifan.activity.LargeImageActivity;
 import com.troy.xifan.activity.ProfileActivity;
 import com.troy.xifan.activity.WirteStatusActivity;
 import com.troy.xifan.config.Constants;
@@ -105,6 +106,7 @@ public class StatusAdapter extends RecyclerArrayAdapter<StatusRes> {
 
             mImageAvatar.setOnClickListener(onClickLister);
             mImageMenu.setOnClickListener(onClickLister);
+            mImagePhoto.setOnClickListener(onClickLister);
             mViewFavorite.setOnClickListener(onClickLister);
             mViewRepeat.setOnClickListener(onClickLister);
             mViewComment.setOnClickListener(onClickLister);
@@ -174,6 +176,14 @@ public class StatusAdapter extends RecyclerArrayAdapter<StatusRes> {
                     Bundle userBundle = new Bundle();
                     userBundle.putParcelable(ProfileActivity.BUNDLE_USER, statusRes.getUser());
                     Router.build(Constants.Router.PROFILE).extras(userBundle).go(mContext);
+                    break;
+                case R.id.image_photo:
+                    if (statusRes.getPhoto() != null) {
+                        Bundle imageBundle = new Bundle();
+                        imageBundle.putString(LargeImageActivity.BUNDLE_IMAGE_URL,
+                                statusRes.getPhoto().getLargeurl());
+                        Router.build(Constants.Router.LARGE_IMAGE).extras(imageBundle).go(mContext);
+                    }
                     break;
                 case R.id.view_favorite:
                     createOrDestroyFavorite(statusRes);
