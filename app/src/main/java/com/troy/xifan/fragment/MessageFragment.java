@@ -47,6 +47,7 @@ public class MessageFragment extends BaseFragment {
         };
 
         mTabLayout.setupWithViewPager(mViewPager);
+        mViewPager.setOffscreenPageLimit(mTabTitles.length);
         mViewPager.setAdapter(
                 new MessagePagerAdapter(getChildFragmentManager(), mFragments, mTabTitles));
     }

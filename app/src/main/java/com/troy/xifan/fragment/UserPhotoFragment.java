@@ -34,6 +34,7 @@ public class UserPhotoFragment extends BaseFragment {
     private UserRes mUser;
     private int mPage;
     private PhotoAdapter mPhotoAdapter;
+    private boolean isLoaded;
 
     public static Fragment newInstance(Bundle bundle) {
         Fragment fragment = new UserPhotoFragment();
@@ -110,15 +111,19 @@ public class UserPhotoFragment extends BaseFragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        getUserPhotos(false);
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        if (isVisibleToUser && !isLoaded) {
+            getUserPhotos(false);
+            isLoaded = true;
+        }
     }
 
     private void getUserPhotos(final boolean loadMore) {
-        mPage = loadMore ? ++mPage : 0;
+        mPage = loadMore ? ++mPage : 1;
         StatusesRequest request = new StatusesRequest();
-        request.setPage(String.valueOf(++mPage));
+        request.setPage(String.valueOf(mPage));
         request.setId(mUser == null ? null : mUser.getId());
 
         HttpRequestFactory.getInstance()

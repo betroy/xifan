@@ -17,10 +17,16 @@ android {
         debug {}
 
         release {
-//            storeFile file("../xifan.jks")
-//            storePassword STORE_PASSWORD
-//            keyAlias KEY_ALIAS
-//            keyPassword KEY_PASSWORD
+            // default keystore file, PLZ config file path in local.properties
+            Properties properties = new Properties()
+            //加载本地local.properties文件
+            if (rootProject.file("local.properties").exists()) {
+                properties.load(rootProject.file("local.properties").newDataInputStream())
+            }
+            storeFile file(properties.get("STOREFILE") ?: System.getenv("FLOW_CERTIFICATE_FILE"))
+            storePassword properties.get("STORE_PASSWORD") ?: System.getenv("FLOW_KEYSTORE_PASS")
+            keyAlias properties.get("KEY_ALIAS") ?: System.getenv("FLOW_ALIAS_NAME")
+            keyPassword properties.get("KEY_PASSWORD") ?: System.getenv("FLOW_ALIAS_PASS")
         }
     }
 

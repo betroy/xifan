@@ -54,7 +54,7 @@ public class SearchFragment extends BaseFragment {
         mTabTitles = new String[] {
                 getString(R.string.title_tab_topic), getString(R.string.title_tab_public_timeline)
         };
-        mViewPager.setOffscreenPageLimit(3);
+        mViewPager.setOffscreenPageLimit(mTabTitles.length);
         mViewPager.setAdapter(
                 new SearchPagerAdapter(getChildFragmentManager(), mFragments, mTabTitles));
         mTabLayout.setupWithViewPager(mViewPager);

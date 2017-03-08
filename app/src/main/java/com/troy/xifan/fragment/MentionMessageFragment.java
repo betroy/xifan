@@ -30,6 +30,7 @@ public class MentionMessageFragment extends BaseFragment {
 
     private String mMaxId;
     private StatusAdapter mStatusAdapter;
+    private boolean isLoaded;
 
     public static Fragment newInstance() {
         return new MentionMessageFragment();
@@ -41,9 +42,13 @@ public class MentionMessageFragment extends BaseFragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        getMentions(false);
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        if (isVisibleToUser && !isLoaded) {
+            getMentions(false);
+            isLoaded = true;
+        }
     }
 
     private void getMentions(final boolean loadMore) {

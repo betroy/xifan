@@ -1,7 +1,6 @@
 package com.troy.xifan.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import butterknife.BindView;
@@ -28,22 +27,27 @@ public class PublicTimelineFragment extends BaseFragment {
     @BindView(R.id.recycler_view) EasyRecyclerView mRecyclerView;
 
     private StatusAdapter mStatusAdapter;
+    private boolean isLoaded;
 
     public static Fragment newInstance() {
         return new PublicTimelineFragment();
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        getPublicTimeline();
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        if (isVisibleToUser && !isLoaded) {
+            getPublicTimeline();
+            isLoaded = true;
+        }
     }
 
     private void getPublicTimeline() {
-        BaseRequestParams request=new BaseRequestParams();
+        BaseRequestParams request = new BaseRequestParams();
 
         HttpRequestFactory.getInstance()
-                .getPublicTimeline(request,new SimpleHttpRequestCallback<List<StatusRes>>() {
+                .getPublicTimeline(request, new SimpleHttpRequestCallback<List<StatusRes>>() {
                     @Override
                     public void onSuccess(List<StatusRes> responseData) {
                         mStatusAdapter.clear();
