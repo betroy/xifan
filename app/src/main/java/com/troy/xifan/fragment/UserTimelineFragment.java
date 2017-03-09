@@ -34,6 +34,8 @@ public class UserTimelineFragment extends BaseFragment {
     private StatusAdapter mStatusAdapter;
     private UserRes mUser;
     private boolean isLoaded;
+    private boolean isVisible;
+    private boolean isPrepared;
 
     public static Fragment newInstance(Bundle bundle) {
         Fragment fragment = new UserTimelineFragment();
@@ -44,10 +46,17 @@ public class UserTimelineFragment extends BaseFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         Bundle bundle = getArguments();
         if (bundle != null) {
             mUser = bundle.getParcelable(ProfileActivity.BUNDLE_USER);
         }
+
+        if (isVisible) {
+            getUserTimeline(false);
+        }
+
+        isPrepared = true;
     }
 
     @Override
@@ -101,17 +110,21 @@ public class UserTimelineFragment extends BaseFragment {
 
     }
 
+    //Fragment 从不可见变为可见，isVisibleToUser参数由false-->true 再调用onAttach()-->onCreate()
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-
-        if (isVisibleToUser && !isLoaded) {
-            getUserTimeline(false);
-            isLoaded = true;
+        if (isVisibleToUser) {
+            if (!isLoaded && isPrepared) {
+                getUserTimeline(false);
+            }
+            isVisible = true;
         }
     }
 
     private void getUserTimeline(final boolean loadMore) {
+        isLoaded = true;
+
         StatusesRequest request = new StatusesRequest();
         request.setMax_id(loadMore ? mMaxId : null);
         request.setId(mUser == null ? null : mUser.getId());

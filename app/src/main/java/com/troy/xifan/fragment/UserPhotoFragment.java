@@ -35,6 +35,8 @@ public class UserPhotoFragment extends BaseFragment {
     private int mPage;
     private PhotoAdapter mPhotoAdapter;
     private boolean isLoaded;
+    private boolean isVisible;
+    private boolean isPrepared;
 
     public static Fragment newInstance(Bundle bundle) {
         Fragment fragment = new UserPhotoFragment();
@@ -45,10 +47,17 @@ public class UserPhotoFragment extends BaseFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         Bundle bundle = getArguments();
         if (bundle != null) {
             mUser = bundle.getParcelable(ProfileActivity.BUNDLE_USER);
         }
+
+        if (isVisible) {
+            getUserPhotos(false);
+        }
+
+        isPrepared = true;
     }
 
     @Override
@@ -113,14 +122,17 @@ public class UserPhotoFragment extends BaseFragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-
-        if (isVisibleToUser && !isLoaded) {
-            getUserPhotos(false);
-            isLoaded = true;
+        if (isVisibleToUser) {
+            if (!isLoaded && isPrepared) {
+                getUserPhotos(false);
+            }
+            isVisible = true;
         }
     }
 
     private void getUserPhotos(final boolean loadMore) {
+        isLoaded = true;
+
         mPage = loadMore ? ++mPage : 1;
         StatusesRequest request = new StatusesRequest();
         request.setPage(String.valueOf(mPage));

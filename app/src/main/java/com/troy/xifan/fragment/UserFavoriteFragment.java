@@ -33,6 +33,8 @@ public class UserFavoriteFragment extends BaseFragment {
     private int mPage;
     private StatusAdapter mStatusAdapter;
     private boolean isLoaded;
+    private boolean isVisible;
+    private boolean isPrepared;
 
     public static Fragment newInstance(Bundle bundle) {
         Fragment fragment = new UserFavoriteFragment();
@@ -43,10 +45,17 @@ public class UserFavoriteFragment extends BaseFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
         Bundle bundle = getArguments();
         if (bundle != null) {
             mUser = bundle.getParcelable(ProfileActivity.BUNDLE_USER);
         }
+
+        if (isVisible) {
+            getFavorites(false);
+        }
+
+        isPrepared = true;
     }
 
     @Override
@@ -103,14 +112,17 @@ public class UserFavoriteFragment extends BaseFragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-
-        if (isVisibleToUser && !isLoaded) {
-            getFavorites(false);
-            isLoaded = true;
+        if (isVisibleToUser) {
+            if (!isLoaded && isPrepared) {
+                getFavorites(false);
+            }
+            isVisible = true;
         }
     }
 
     private void getFavorites(final boolean loadMore) {
+        isLoaded = true;
+
         BaseRequestParams request = new BaseRequestParams();
         request.setPage(String.valueOf(++mPage));
         request.setId(mUser == null ? null : mUser.getId());
