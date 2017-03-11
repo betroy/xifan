@@ -29,5 +29,5 @@ before_install:
 - openssl aes-256-cbc -K $encrypted_9832fa0e04b3_key -iv $encrypted_9832fa0e04b3_iv
   -in xifan.jks.enc -out ./xifan.jks -d
 
-after_deploy:
+after_success:
 - fir p app/build/outputs/apk/app-release.apk -T $FIR_TOKEN -c "`git cat-file tag $TRAVIS_TAG`"
