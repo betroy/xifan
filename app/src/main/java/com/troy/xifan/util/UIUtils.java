@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.Toast;
@@ -22,9 +23,14 @@ public final class UIUtils {
         Snackbar.make(view, "snackbar", Snackbar.LENGTH_LONG).show();
     }
 
-    public static void showDialog(Context context, String msg, final OnDialogListener callback) {
+    public static void showDialog(Context context, String title,String msg, final OnDialogListener callback) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setMessage(msg);
+        if(!TextUtils.isEmpty(title)){
+            builder.setTitle(title);
+        }
+        if(!TextUtils.isEmpty(msg)){
+            builder.setMessage(msg);
+        }
         builder.setNegativeButton(context.getString(R.string.text_dialog_negative),
                 new DialogInterface.OnClickListener() {
                     @Override
@@ -38,6 +44,24 @@ public final class UIUtils {
                     public void onClick(DialogInterface dialogInterface, int i) {
 
                         callback.onConfirm();
+                    }
+                });
+        builder.create().show();
+    }
+
+    public static void showOkDialog(Context context, String title, String msg) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        if (!TextUtils.isEmpty(title)) {
+            builder.setTitle(title);
+        }
+        if(!TextUtils.isEmpty(msg)){
+            builder.setMessage(msg);
+        }
+        builder.setPositiveButton(context.getString(R.string.text_dialog_positive),
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
                     }
                 });
         builder.create().show();

@@ -6,9 +6,9 @@
     <Preference
         android:key="@string/text_feedback"
         android:title="@string/text_feedback"/>
-    <!--<Preference-->
-        <!--android:key="@string/text_check_update"-->
-        <!--android:title="@string/text_check_update"/>-->
+    <Preference
+        android:key="@string/text_check_update"
+        android:title="@string/text_check_update"/>
     <Preference
         android:key="@string/text_about"
         android:title="@string/text_about"/>

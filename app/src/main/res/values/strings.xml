@@ -60,6 +60,11 @@
     <string name="text_feedback">意见反馈</string>
     <string name="text_check_update">检查更新</string>
     <string name="text_about">关于饭否</string>
+    <string name="text_checking_update">正在检查更新...</string>
+    <string name="title_check_upate">检查更新</string>
+    <string name="title_tips">提示</string>
+    <string name="text_check_update_fail">检查更新失败</string>
+    <string name="text_not_need_update">已是最新版本，不需要更新。</string>
 
     <!--text-->
     <string name="text_url_link">&#160;网页链接</string>
@@ -99,6 +104,7 @@
     <string name="text_num_zero">0</string>
     <string name="text_logout">登出</string>
     <string name="text_logout_tips">确定登出？</string>
+    <string name="text_downloading">下载中...</string>
 
     <!--friends-->
     <string name="title_following">关注</string>

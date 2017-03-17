@@ -1,5 +1,6 @@
 package com.troy.xifan.activity;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.Preference;
@@ -12,18 +13,26 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.chenenyu.router.Router;
 import com.chenenyu.router.annotation.Route;
+import com.google.gson.Gson;
 import com.troy.xifan.App;
+import com.troy.xifan.BuildConfig;
 import com.troy.xifan.R;
 import com.troy.xifan.config.Constants;
 import com.troy.xifan.manage.UserHolder;
+import com.troy.xifan.model.response.AppVersionInfoRes;
+import com.troy.xifan.service.DownLoadApkService;
 import com.troy.xifan.util.UIUtils;
 import com.troy.xifan.util.Utils;
+import im.fir.sdk.FIR;
+import im.fir.sdk.VersionCheckCallback;
 
 /**
  * Created by chenlongfei on 2017/1/25.
  */
 @Route(Constants.Router.SETTINGS)
 public class SettingsActivity extends BaseActivity {
+    private static final String FIR_TOKEN = "2def92fc28bb812a895538fa54ed38d3";
+
     @BindView(R.id.toolbar) Toolbar mToolbar;
     @BindView(R.id.layout_logout) View mViewLogout;
 
@@ -49,8 +58,8 @@ public class SettingsActivity extends BaseActivity {
         mViewLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UIUtils.showDialog(SettingsActivity.this, getString(R.string.text_logout_tips),
-                        new UIUtils.OnDialogListener() {
+                UIUtils.showDialog(SettingsActivity.this, getString(R.string.title_tips),
+                        getString(R.string.text_logout_tips), new UIUtils.OnDialogListener() {
                             @Override
                             public void onConfirm() {
                                 UserHolder.getInstance().cleanUser();
@@ -91,6 +100,8 @@ public class SettingsActivity extends BaseActivity {
         private Preference mCheckUpdatePre;
         private Preference mAboutPre;
 
+        private Intent mServiceIntent;
+
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -102,7 +113,8 @@ public class SettingsActivity extends BaseActivity {
             addPreferencesFromResource(R.xml.preference);
             //mCleanCachePre = findPreference(mResources.getString(R.string.text_clean_cache));
             //mFeedbackPre = findPreference(mResources.getString(R.string.text_feedback));
-            //mCheckUpdatePre = findPreference(mResources.getString(R.string.text_check_update));
+            mCheckUpdatePre = findPreference(mResources.getString(R.string.text_check_update));
+            mCheckUpdatePre.setOnPreferenceClickListener(this);
             mAboutPre = findPreference(getString(R.string.text_about));
             mAboutPre.setOnPreferenceClickListener(this);
         }
@@ -110,10 +122,68 @@ public class SettingsActivity extends BaseActivity {
         @Override
         public boolean onPreferenceClick(Preference preference) {
             String key = preference.getKey();
-            if (getString(R.string.text_about).equals(key)) {
+            if (getString(R.string.text_check_update).equals(key)) {
+                checkUpdate();
+            } else if (getString(R.string.text_about).equals(key)) {
                 UIUtils.showToast(getActivity(), Utils.getVersionName());
             }
             return false;
+        }
+
+        private void checkUpdate() {
+            FIR.checkForUpdateInFIR(FIR_TOKEN, new VersionCheckCallback() {
+                @Override
+                public void onSuccess(String versionJson) {
+                    AppVersionInfoRes appVersionInfo =
+                            new Gson().fromJson(versionJson, AppVersionInfoRes.class);
+                    String firVersion = appVersionInfo.getVersionShort().replaceAll("[.]", "");
+                    String currentVersion = BuildConfig.VERSION_NAME.replaceAll("[.]", "");
+                    if (Integer.parseInt(firVersion) > Integer.parseInt(currentVersion)) {
+                        showAppUpdateDialog(appVersionInfo);
+                    } else {
+                        UIUtils.showOkDialog(getActivity(), getString(R.string.title_check_upate),
+                                getString(R.string.text_not_need_update));
+                    }
+                }
+
+                @Override
+                public void onFail(Exception exception) {
+                    UIUtils.showToast(getActivity(), getString(R.string.text_check_update_fail));
+                }
+
+                @Override
+                public void onStart() {
+                    UIUtils.showToast(getActivity(), getString(R.string.text_checking_update));
+                }
+
+                @Override
+                public void onFinish() {
+                }
+            });
+        }
+
+        private void showAppUpdateDialog(final AppVersionInfoRes appVersionInfo) {
+            UIUtils.showDialog(getActivity(), getString(R.string.title_check_upate),
+                    appVersionInfo.getChangelog(), new UIUtils.OnDialogListener() {
+                        @Override
+                        public void onConfirm() {
+                            mServiceIntent = new Intent(getActivity(), DownLoadApkService.class);
+                            mServiceIntent.putExtra(DownLoadApkService.EXTRA_URL,
+                                    appVersionInfo.getInstallUrl());
+                            getActivity().startService(mServiceIntent);
+                        }
+
+                        @Override
+                        public void onCancel() {
+
+                        }
+                    });
+        }
+
+        @Override
+        public void onDestroy() {
+            super.onDestroy();
+            getActivity().stopService(mServiceIntent);
         }
     }
 }

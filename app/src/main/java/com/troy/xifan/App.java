@@ -8,6 +8,7 @@ import com.facebook.stetho.Stetho;
 import com.orhanobut.logger.LogLevel;
 import com.orhanobut.logger.Logger;
 import com.troy.xifan.model.response.UserRes;
+import im.fir.sdk.FIR;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +44,8 @@ public class App extends Application {
                 .hideThreadInfo()               // default shown
                 .logLevel(LogLevel.FULL)        // default LogLevel.FULL
                 .methodOffset(2);            // default 0
+
+        FIR.init(this);
     }
 
     public static App getInstance() {

@@ -87,4 +87,6 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.jude:easyrecyclerview:4.3.4'
     compile 'it.sephiroth.android.library.bottomnavigation:bottom-navigation:2.0.1-rc1'
+    compile 'im.fir:fir-sdk:latest.integration@aar'
+
 }

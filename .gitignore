@@ -1,4 +1,8 @@
+# Local configuration file (sdk path, etc)
 /local.properties
+
+# Keystore files
+*.jks
 
 # AndroidStudioGitIgnore
 Android Studio .gitignore
@@ -42,4 +46,3 @@ local.properties
 
 #NDK
 obj/
-
