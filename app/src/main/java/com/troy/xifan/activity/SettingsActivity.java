@@ -100,8 +100,6 @@ public class SettingsActivity extends BaseActivity {
         private Preference mCheckUpdatePre;
         private Preference mAboutPre;
 
-        private Intent mServiceIntent;
-
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -167,10 +165,11 @@ public class SettingsActivity extends BaseActivity {
                     appVersionInfo.getChangelog(), new UIUtils.OnDialogListener() {
                         @Override
                         public void onConfirm() {
-                            mServiceIntent = new Intent(getActivity(), DownLoadApkService.class);
-                            mServiceIntent.putExtra(DownLoadApkService.EXTRA_URL,
+                            Intent serviceIntent =
+                                    new Intent(getActivity(), DownLoadApkService.class);
+                            serviceIntent.putExtra(DownLoadApkService.EXTRA_URL,
                                     appVersionInfo.getInstallUrl());
-                            getActivity().startService(mServiceIntent);
+                            getActivity().startService(serviceIntent);
                         }
 
                         @Override
@@ -178,12 +177,6 @@ public class SettingsActivity extends BaseActivity {
 
                         }
                     });
-        }
-
-        @Override
-        public void onDestroy() {
-            super.onDestroy();
-            getActivity().stopService(mServiceIntent);
         }
     }
 }
