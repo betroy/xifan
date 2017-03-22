@@ -3,10 +3,13 @@ package com.troy.xifan;
 import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
+import com.avos.avoscloud.AVAnalytics;
+import com.avos.avoscloud.AVOSCloud;
 import com.chenenyu.router.Router;
 import com.facebook.stetho.Stetho;
 import com.orhanobut.logger.LogLevel;
 import com.orhanobut.logger.Logger;
+import com.troy.xifan.config.Constants;
 import com.troy.xifan.model.response.UserRes;
 import im.fir.sdk.FIR;
 import java.util.ArrayList;
@@ -46,6 +49,9 @@ public class App extends Application {
                 .methodOffset(2);            // default 0
 
         FIR.init(this);
+        // 初始化参数依次为 this, AppId, AppKey
+        AVOSCloud.initialize(this, Constants.AVOSCloud.APP_ID, Constants.AVOSCloud.APP_KEY);
+        AVAnalytics.enableCrashReport(this, true);
     }
 
     public static App getInstance() {

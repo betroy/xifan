@@ -124,4 +124,9 @@ public class Constants {
         public static final String NAME = "xifan";
         public static final String KEY_USER_ID = "user_id";
     }
+
+    public static class AVOSCloud{
+        public static final String APP_ID="hNoFuqFvKx5crJBz6mMAFwPL-gzGzoHsz";
+        public static final String APP_KEY="jfEvEXMydhcRkgzL4hWWj72L";
+    }
 }

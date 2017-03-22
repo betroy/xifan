@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.avos.avoscloud.feedback.FeedbackAgent;
 import com.chenenyu.router.Router;
 import com.chenenyu.router.annotation.Route;
 import com.google.gson.Gson;
@@ -110,7 +111,8 @@ public class SettingsActivity extends BaseActivity {
             mResources = getResources();
             addPreferencesFromResource(R.xml.preference);
             //mCleanCachePre = findPreference(mResources.getString(R.string.text_clean_cache));
-            //mFeedbackPre = findPreference(mResources.getString(R.string.text_feedback));
+            mFeedbackPre = findPreference(mResources.getString(R.string.text_feedback));
+            mFeedbackPre.setOnPreferenceClickListener(this);
             mCheckUpdatePre = findPreference(mResources.getString(R.string.text_check_update));
             mCheckUpdatePre.setOnPreferenceClickListener(this);
             mAboutPre = findPreference(getString(R.string.text_about));
@@ -120,7 +122,10 @@ public class SettingsActivity extends BaseActivity {
         @Override
         public boolean onPreferenceClick(Preference preference) {
             String key = preference.getKey();
-            if (getString(R.string.text_check_update).equals(key)) {
+            if (mResources.getString(R.string.text_feedback).equals(key)) {
+                FeedbackAgent agent = new FeedbackAgent(getActivity());
+                agent.startDefaultThreadActivity();
+            } else if (getString(R.string.text_check_update).equals(key)) {
                 checkUpdate();
             } else if (getString(R.string.text_about).equals(key)) {
                 UIUtils.showToast(getActivity(), Utils.getVersionName());
