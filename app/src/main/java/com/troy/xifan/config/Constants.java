@@ -62,6 +62,9 @@ public class Constants {
         public static final String DESTROY_FRIENDSHIP_URL = "/friendships/destroy.json";
         public static final String IS_EXIST_FRIENDSHIP_URL = "/friendships/exists.json";
 
+        //******account******
+        public static final String ACCOUNT_NOTIFICATION = "/account/notification.json";
+
         public static final String OAUTH_VERSION_VALUE = "1.0";
         public static final String OAUTH_SIGNATURE_METHOD_VALUE = "HMAC-SHA1";
         public static final String X_AUTH_MODE_VALUE = "client_auth";
@@ -105,7 +108,7 @@ public class Constants {
         public static final String MAIN = "main";
         public static final String WRITE_STATUS = "write_status";
         public static final String STATUS_DETAIL = "status_detail";
-        public static final String LARGE_IMAGE="large_image";
+        public static final String LARGE_IMAGE = "large_image";
         public static final String USER_LIST = "user_list";
         public static final String SEARCH = "search";
         public static final String TREND_STATUSES = "trend_statuses";
@@ -125,8 +128,12 @@ public class Constants {
         public static final String KEY_USER_ID = "user_id";
     }
 
-    public static class AVOSCloud{
-        public static final String APP_ID="hNoFuqFvKx5crJBz6mMAFwPL-gzGzoHsz";
-        public static final String APP_KEY="jfEvEXMydhcRkgzL4hWWj72L";
+    public static class AVOSCloud {
+        public static final String APP_ID = "hNoFuqFvKx5crJBz6mMAFwPL-gzGzoHsz";
+        public static final String APP_KEY = "jfEvEXMydhcRkgzL4hWWj72L";
+    }
+
+    public static class Fir {
+        public static final String FIR_TOKEN = "2def92fc28bb812a895538fa54ed38d3";
     }
 }

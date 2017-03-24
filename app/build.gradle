@@ -10,14 +10,14 @@ android {
         minSdkVersion 21
         targetSdkVersion 21
         versionCode 1
-        versionName "1.1.1"
+        versionName "1.1.2"
     }
 
     signingConfigs {
         debug {}
 
         release {
-            // default keystore file, PLZ config file path in local.properties
+            // default keystore file, PLZ config file patmh in local.properties
             Properties properties = new Properties()
             //加载本地local.properties文件
             if (rootProject.file("local.properties").exists()) {
@@ -96,8 +96,6 @@ dependencies {
     compile 'im.fir:fir-sdk:latest.integration@aar'
     // LeanCloud 基础包
     compile ('cn.leancloud.android:avoscloud-sdk:v3.+')
-    // 推送与实时聊天需要的包
-    compile ('cn.leancloud.android:avoscloud-push:v3.+@aar'){transitive = true}
     // LeanCloud 统计包
     compile ('cn.leancloud.android:avoscloud-statistics:v3.+')
     // LeanCloud 用户反馈包

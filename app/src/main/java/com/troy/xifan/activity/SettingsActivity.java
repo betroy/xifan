@@ -32,8 +32,6 @@ import im.fir.sdk.VersionCheckCallback;
  */
 @Route(Constants.Router.SETTINGS)
 public class SettingsActivity extends BaseActivity {
-    private static final String FIR_TOKEN = "2def92fc28bb812a895538fa54ed38d3";
-
     @BindView(R.id.toolbar) Toolbar mToolbar;
     @BindView(R.id.layout_logout) View mViewLogout;
 
@@ -134,7 +132,7 @@ public class SettingsActivity extends BaseActivity {
         }
 
         private void checkUpdate() {
-            FIR.checkForUpdateInFIR(FIR_TOKEN, new VersionCheckCallback() {
+            FIR.checkForUpdateInFIR(Constants.Fir.FIR_TOKEN, new VersionCheckCallback() {
                 @Override
                 public void onSuccess(String versionJson) {
                     AppVersionInfoRes appVersionInfo =

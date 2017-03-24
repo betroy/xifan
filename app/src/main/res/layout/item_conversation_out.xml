@@ -18,6 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
+        android:layout_margin="@dimen/margin_smaller"
         android:background="@mipmap/bg_dm_out"
         android:padding="@dimen/margin_smaller"
         android:textColor="@color/colorBlack"

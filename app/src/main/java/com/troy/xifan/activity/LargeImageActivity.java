@@ -17,10 +17,11 @@ import com.troy.xifan.config.Constants;
  */
 @Route(Constants.Router.LARGE_IMAGE)
 public class LargeImageActivity extends BaseActivity {
+    public static final String BUNDLE_IMAGE_URL = "image_url";
+
     @BindView(R.id.toolbar) Toolbar mToolbar;
     @BindView(R.id.image_large_image) ImageView mImageLargeImage;
 
-    public static final String BUNDLE_IMAGE_URL = "image_url";
     private String mUrl;
 
     @Override
