@@ -77,7 +77,7 @@ public class HttpRequestFactory {
         subscribe(mServiceFactory.getUserTimeline(requestParams.convertToQueryMap()), callback);
     }
 
-    public void getPublicTimeline(BaseRequestParams requestParams,HttpRequestCallback callback) {
+    public void getPublicTimeline(BaseRequestParams requestParams, HttpRequestCallback callback) {
         subscribe(mServiceFactory.getPublicTimeline(requestParams.convertToQueryMap()), callback);
     }
 
@@ -165,6 +165,10 @@ public class HttpRequestFactory {
 
     public void isExistFriendship(BaseRequestParams requestParams, HttpRequestCallback callback) {
         subscribe(mServiceFactory.isExistFriendship(requestParams.convertToQueryMap()), callback);
+    }
+
+    public void getNotification(HttpRequestCallback callback) {
+        subscribe(mServiceFactory.getNotification(), callback);
     }
 
     private <T> void subscribe(Observable<HttpResponseData<T>> observable,

@@ -1,5 +1,6 @@
 package com.troy.xifan.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.troy.xifan.R;
 import com.troy.xifan.activity.ConversationActivity;
+import com.troy.xifan.activity.MainActivity;
 import com.troy.xifan.adapter.ConversationListAdapter;
 import com.troy.xifan.config.Constants;
 import com.troy.xifan.http.HttpRequestFactory;
@@ -30,6 +32,7 @@ public class DirectMessageFragment extends BaseFragment {
     private int mPage;
     private ConversationListAdapter mConversationListAdapter;
     private boolean isLoaded;
+    private MainActivity mMainActivity;
 
     public static Fragment newInstance() {
         return new DirectMessageFragment();
@@ -50,7 +53,17 @@ public class DirectMessageFragment extends BaseFragment {
         }
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mMainActivity = (MainActivity) context;
+    }
+
     private void getDirectMessage(final boolean loadMore) {
+        if (!loadMore && mMainActivity != null) {
+            mMainActivity.removeMessageBadge();
+        }
+
         mPage = loadMore ? ++mPage : 1;
         BaseRequestParams request = new BaseRequestParams();
         request.setPage(String.valueOf(mPage));

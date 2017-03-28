@@ -15,6 +15,7 @@ import com.avos.avoscloud.feedback.FeedbackAgent;
 import com.chenenyu.router.Router;
 import com.chenenyu.router.annotation.Route;
 import com.google.gson.Gson;
+import com.orhanobut.logger.Logger;
 import com.troy.xifan.App;
 import com.troy.xifan.BuildConfig;
 import com.troy.xifan.R;
@@ -85,6 +86,7 @@ public class SettingsActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                Logger.d("onOptionsItemSelected");
                 finish();
                 break;
         }

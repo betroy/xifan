@@ -4,6 +4,7 @@ import com.troy.xifan.config.Constants;
 import com.troy.xifan.http.response.HttpResponseData;
 import com.troy.xifan.model.response.DirectMessagesListRes;
 import com.troy.xifan.model.response.DirectMessagesRes;
+import com.troy.xifan.model.response.NotificationRes;
 import com.troy.xifan.model.response.StatusRes;
 import com.troy.xifan.model.response.TrendsRes;
 import com.troy.xifan.model.response.UserRes;
@@ -145,4 +146,8 @@ public interface ApiFactory {
     //查询两个用户之间是否有follow关系
     @GET(Constants.FanFou.IS_EXIST_FRIENDSHIP_URL)
     Observable<HttpResponseData<String>> isExistFriendship(@QueryMap Map<String, String> queryMap);
+
+    //返回未读的mentions, direct message 以及关注请求数量
+    @GET(Constants.FanFou.ACCOUNT_NOTIFICATION)
+    Observable<HttpResponseData<NotificationRes>> getNotification();
 }

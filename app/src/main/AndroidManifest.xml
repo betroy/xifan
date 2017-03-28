@@ -36,6 +36,7 @@
         <activity
             android:name=".activity.MainActivity"
             android:screenOrientation="portrait"
+            android:launchMode="singleTask"
             >
         </activity>
         <activity
@@ -79,12 +80,15 @@
         <activity
             android:name=".activity.BrowserActivity"
             android:screenOrientation="portrait"/>
+
         <service android:name=".service.DownLoadApkService"/>
+        <service android:name=".service.NotificationService"/>
+
         <receiver android:name=".service.DownLoadApkService$DownloadApkReceiver"/>
 
         <!-- 反馈组件（需要加入以下声明）START -->
         <activity
-            android:name="com.avos.avoscloud.feedback.ThreadActivity" >
+            android:name="com.avos.avoscloud.feedback.ThreadActivity">
         </activity>
         <!-- 反馈组件 END -->
     </application>
