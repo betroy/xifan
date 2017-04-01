@@ -47,29 +47,26 @@ public class UserListActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_following);
+        ButterKnife.bind(this);
+
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             mUser = bundle.getParcelable(BUNDLE_USER);
             mType = bundle.getString(BUNLDE_TYPE);
         }
 
-        setContentView(R.layout.activity_following);
-        ButterKnife.bind(this);
         initViews();
-
-        if (TYPE_GET_FOLLOWER.equals(mType)) {
-            getFollowers();
-        } else {
-            getFriends();
-        }
     }
 
     @Override
     protected void initViews() {
         if (TYPE_GET_FOLLOWER.equals(mType)) {
             mToolbar.setTitle(getString(R.string.title_follower));
+            getFollowers();
         } else {
             mToolbar.setTitle(getString(R.string.title_following));
+            getFriends();
         }
         mToolbar.setElevation(getResources().getDimension(R.dimen.elevation));
         setSupportActionBar(mToolbar);

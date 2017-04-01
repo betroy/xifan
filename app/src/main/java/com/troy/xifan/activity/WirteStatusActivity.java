@@ -88,6 +88,7 @@ public class WirteStatusActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mViewPhotoContainer.setVisibility(View.GONE);
+        mEditContent.requestFocus();
 
         if (BUNDLE_VALUE_STATUS_COMMENT.equals(mStatusType)) {
             mEditContent.setText(FanFouUtils.formatAt(mStatusRes));
@@ -96,8 +97,6 @@ public class WirteStatusActivity extends BaseActivity {
             mEditContent.setText(FanFouUtils.formatRepeat(mStatusRes));
             mEditContent.setSelection(0);
         }
-
-        mEditContent.requestFocus();
     }
 
     private void initListener() {

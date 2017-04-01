@@ -29,10 +29,16 @@ public class LargeImageActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_large_image);
         ButterKnife.bind(this);
+
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             mUrl = bundle.getString(BUNDLE_IMAGE_URL);
         }
+
+        if (mUrl == null) {
+            return;
+        }
+
         initViews();
     }
 
