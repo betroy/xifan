@@ -1,6 +1,7 @@
 package com.troy.xifan.http;
 
 import com.facebook.stetho.okhttp3.StethoInterceptor;
+import com.troy.xifan.App;
 import com.troy.xifan.api.ApiFactory;
 import com.troy.xifan.config.Constants;
 import com.troy.xifan.http.callback.HttpRequestCallback;
@@ -10,9 +11,13 @@ import com.troy.xifan.http.exception.ErrorCode;
 import com.troy.xifan.http.exception.ExceptionHandle;
 import com.troy.xifan.http.request.BaseRequestParams;
 import com.troy.xifan.http.response.HttpResponseData;
+import com.troy.xifan.util.NetUtils;
 import com.troy.xifan.util.XAuthUtils;
+import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
+import okhttp3.Cache;
+import okhttp3.CacheControl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -33,16 +38,19 @@ import rx.schedulers.Schedulers;
 public class HttpRequestFactory {
     //超时60s
     private static final long TIMEOUT = 60;
+    private static final int CACHE_SIZE = 10 * 1024 * 1024;
     private static HttpRequestFactory mInstance;
     private ApiFactory mServiceFactory;
 
     public HttpRequestFactory() {
         OkHttpClient kHttpClient =
-                new OkHttpClient.Builder().addNetworkInterceptor(new StethoInterceptor())
-                        .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
+                new OkHttpClient.Builder().connectTimeout(TIMEOUT, TimeUnit.SECONDS)
                         .readTimeout(TIMEOUT, TimeUnit.SECONDS)
                         .writeTimeout(TIMEOUT, TimeUnit.SECONDS)
                         .addNetworkInterceptor(mTokenInterceptor)
+                        .addNetworkInterceptor(mCacheInterceptor)
+                        .cache(getCache())
+                        .addNetworkInterceptor(new StethoInterceptor())
                         .build();
 
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Constants.FanFou.FANFOU_API_URL)
@@ -63,6 +71,11 @@ public class HttpRequestFactory {
             }
         }
         return mInstance;
+    }
+
+    private Cache getCache() {
+        File file = new File(App.getInstance().getCacheDir(), "response");
+        return new Cache(file, CACHE_SIZE);
     }
 
     public void getAccessToken(String username, String password, HttpRequestCallback callback) {
@@ -277,6 +290,37 @@ public class HttpRequestFactory {
             Request tokenRequest = builder.header(Constants.HeaderName.AUTHORIZATION,
                     XAuthUtils.getAuthorization(originalRequest)).build();
             return chain.proceed(tokenRequest);
+        }
+    };
+
+    //http 数据缓存
+    private Interceptor mCacheInterceptor = new Interceptor() {
+        @Override
+        public Response intercept(Chain chain) throws IOException {
+            CacheControl.Builder cacheBuilder = new CacheControl.Builder();
+            cacheBuilder.maxAge(0, TimeUnit.SECONDS);
+            cacheBuilder.maxStale(365, TimeUnit.DAYS);
+            CacheControl cacheControl = cacheBuilder.build();
+
+            Request request = chain.request();
+            if (!NetUtils.isNetworkConnected(App.getInstance())) {
+                request = request.newBuilder().cacheControl(cacheControl).build();
+            }
+
+            Response originalResponse = chain.proceed(request);
+            if (NetUtils.isNetworkConnected(App.getInstance())) {
+                int maxAge = 60 * 60; //60 minutes
+                return originalResponse.newBuilder()
+                        .header("Cache-Control", "public ,max-age=" + maxAge)
+                        .removeHeader("Pragma")
+                        .build();
+            } else {
+                int maxStale = 60 * 60 * 24 * 28; // tolerate 4-weeks stale
+                return originalResponse.newBuilder()
+                        .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
+                        .removeHeader("Pragma")
+                        .build();
+            }
         }
     };
 }
