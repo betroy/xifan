@@ -1,6 +1,7 @@
 package com.troy.xifan.http.exception;
 
 import android.content.Context;
+import android.text.TextUtils;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
 import com.orhanobut.logger.Logger;
@@ -53,7 +54,10 @@ public class ExceptionHandle {
             }
 
             try {
-                errorMessage = httpException.response().errorBody().string();
+                String errorBody = httpException.response().errorBody().string();
+                if (!TextUtils.isEmpty(errorBody)) {
+                    errorMessage = errorBody;
+                }
             } catch (IOException e1) {
                 e1.printStackTrace();
             }

@@ -1,6 +1,7 @@
 package com.troy.xifan.http;
 
 import com.facebook.stetho.okhttp3.StethoInterceptor;
+import com.orhanobut.logger.Logger;
 import com.troy.xifan.App;
 import com.troy.xifan.api.ApiFactory;
 import com.troy.xifan.config.Constants;
@@ -22,6 +23,7 @@ import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import rx.Observable;
@@ -43,20 +45,27 @@ public class HttpRequestFactory {
     private ApiFactory mServiceFactory;
 
     public HttpRequestFactory() {
-        OkHttpClient kHttpClient =
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.HEADERS);
+
+        OkHttpClient okHttpClient =
                 new OkHttpClient.Builder().connectTimeout(TIMEOUT, TimeUnit.SECONDS)
                         .readTimeout(TIMEOUT, TimeUnit.SECONDS)
                         .writeTimeout(TIMEOUT, TimeUnit.SECONDS)
-                        .addNetworkInterceptor(mTokenInterceptor)
-                        .addNetworkInterceptor(mCacheInterceptor)
                         .cache(getCache())
+                        .addInterceptor(logging)
+                        .addNetworkInterceptor(mTokenInterceptor)
+                        //应用拦截器，用于离线缓存
+                        .addInterceptor(mCacheInterceptor)
+                        //网络拦截器，用于在线缓存
+                        .addNetworkInterceptor(mCacheInterceptor)
                         .addNetworkInterceptor(new StethoInterceptor())
                         .build();
 
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Constants.FanFou.FANFOU_API_URL)
                 .addConverterFactory(ResponseConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .client(kHttpClient)
+                .client(okHttpClient)
                 .build();
 
         mServiceFactory = retrofit.create(ApiFactory.class);
@@ -297,27 +306,26 @@ public class HttpRequestFactory {
     private Interceptor mCacheInterceptor = new Interceptor() {
         @Override
         public Response intercept(Chain chain) throws IOException {
-            CacheControl.Builder cacheBuilder = new CacheControl.Builder();
-            cacheBuilder.maxAge(0, TimeUnit.SECONDS);
-            cacheBuilder.maxStale(365, TimeUnit.DAYS);
-            CacheControl cacheControl = cacheBuilder.build();
-
             Request request = chain.request();
+            //无网络时走okhttp 内部缓存机制
             if (!NetUtils.isNetworkConnected(App.getInstance())) {
-                request = request.newBuilder().cacheControl(cacheControl).build();
+                //在请求首部中声明读取缓存内容
+                request = request.newBuilder().cacheControl(CacheControl.FORCE_CACHE).build();
             }
 
             Response originalResponse = chain.proceed(request);
+            Logger.d("success:" + originalResponse.isSuccessful());
+
+            //有网络时不读缓存
             if (NetUtils.isNetworkConnected(App.getInstance())) {
-                int maxAge = 60 * 60; //60 minutes
                 return originalResponse.newBuilder()
-                        .header("Cache-Control", "public ,max-age=" + maxAge)
+                        .header("Cache-Control", request.cacheControl().toString())
                         .removeHeader("Pragma")
                         .build();
             } else {
-                int maxStale = 60 * 60 * 24 * 28; // tolerate 4-weeks stale
+                int maxAge = 60 * 60 * 24;
                 return originalResponse.newBuilder()
-                        .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
+                        .header("Cache-Control", "public, only-if-cached, max-age=" + maxAge)
                         .removeHeader("Pragma")
                         .build();
             }
